@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import { ButtonBase, TextInput, theme, unselectable } from '@aragon/ui'
 import { useClickOutside, useOnBlur } from '../../hooks'
+import IconMagnifyingGlass from './IconMagnifyingGlass'
 
 const { accent, contentBackground, contentBorder, textPrimary } = theme
 
@@ -75,17 +76,34 @@ const AutoComplete = React.forwardRef(
     return (
       <div css="position: relative" onBlur={handleBlur} ref={wrapRef}>
         {!selected && (
-          <TextInput
-            css={`
-              caret-color: ${accent};
-            `}
-            ref={ref}
-            wide={wide}
-            required={required}
-            onChange={handleSearch}
-            value={searchValue}
-            onFocus={handleInputFocus}
-          />
+          <React.Fragment>
+            <TextInput
+              css={`
+                caret-color: ${accent};
+                padding-right: 35px;
+              `}
+              ref={ref}
+              wide={wide}
+              required={required}
+              onChange={handleSearch}
+              value={searchValue}
+              onFocus={handleInputFocus}
+            />
+            <div
+              css={`
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 40px;
+                width: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              `}
+            >
+              <IconMagnifyingGlass css="color: #a8b3c8" />
+            </div>
+          </React.Fragment>
         )}
         {selected && (
           <Selected
